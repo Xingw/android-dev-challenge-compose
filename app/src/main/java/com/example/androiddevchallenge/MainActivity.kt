@@ -17,15 +17,23 @@ package com.example.androiddevchallenge
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.androiddevchallenge.data.Dog
+import com.example.androiddevchallenge.ui.DogCard
+import com.example.androiddevchallenge.ui.DogDetails
+import com.example.androiddevchallenge.ui.DogList
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,13 +42,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        if (viewModel.currentDog != null) {
+            viewModel.closeDog()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
 
 // Start building your app here!
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+        val viewModel:MainViewModel = viewModel()
+        val currentDog = viewModel.currentDog
+        DogList(viewModel.dogs){ dog ->
+            if (currentDog == null){
+                viewModel.showDog(dog)
+            }
+        }
+        if (currentDog != null) {
+            DogDetails(currentDog)
+        }
     }
 }
 

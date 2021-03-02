@@ -1,13 +1,17 @@
-# Put title of your app here
+# Dog shop
 
 <!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
 <!--- You can find both of these in the url bar when you open your repository in github. -->
-![Workflow result](https://github.com/<OWNER>/<REPOSITORY>/workflows/Check/badge.svg)
+![Workflow result](https://github.com/Xingw/android-dev-challenge-compose/workflows/Check/badge.svg)
 
 
 ## :scroll: Description
 <!--- Describe your app in one or two sentences -->
+It's a Compose Demo app, for the #AndroidDevChallenge of Jetpack Compose.
 
+- Lists some dogs.
+- Click to show details of each dog.
+- In the details page, click back button to go back to the list.
 
 ## :bulb: Motivation and Context
 <!--- Optionally point readers to interesting parts of your submission. -->
